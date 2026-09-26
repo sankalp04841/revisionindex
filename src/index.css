@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #18181b;
+  color: #f4f4f5;
+}
+
+/* ─── Scrollbars ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* ─── Custom utility classes ───────────────────────────────── */
+@layer components {
+  .card {
+    @apply bg-surface-800 border border-surface-700 rounded-xl transition-all duration-150;
+  }
+  .card:hover {
+    @apply border-surface-600 bg-surface-800;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium
+           transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-accent-500/50
+           disabled:opacity-50 disabled:cursor-not-allowed select-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent-600 text-white hover:bg-accent-500 active:bg-accent-700;
+  }
+
+  .btn-secondary {
+    @apply btn bg-surface-700 text-surface-100 hover:bg-surface-600 active:bg-surface-800
+           border border-surface-600 hover:border-surface-500;
+  }
+
+  .btn-ghost {
+    @apply btn text-surface-300 hover:text-surface-100 hover:bg-surface-700;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold tracking-wide;
+  }
+
+  .badge-blue {
+    @apply badge bg-accent-900/60 text-accent-300 border border-accent-800/50;
+  }
+
+  .badge-amber {
+    @apply badge bg-amber-900/40 text-amber-300 border border-amber-800/50;
+  }
+
+  .badge-green {
+    @apply badge bg-emerald-900/40 text-emerald-300 border border-emerald-800/50;
+  }
+
+  .badge-surface {
+    @apply badge bg-surface-700 text-surface-300 border border-surface-600;
+  }
+
+  .input {
+    @apply bg-surface-800 border border-surface-600 rounded-lg px-3 py-2 text-sm
+           text-surface-100 placeholder-surface-500 focus:outline-none
+           focus:border-accent-500 focus:ring-1 focus:ring-accent-500/30
+           transition-colors duration-150;
+  }
+
+  .section-label {
+    @apply text-xs font-semibold tracking-wider text-surface-500 uppercase;
+  }
+}
+
+/* ─── Animations ────────────────────────────────────────────── */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 2s linear infinite;
+}
+
+/* ─── Drawer overlay ────────────────────────────────────────── */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  backdrop-filter: blur(2px);
+}
+
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 480px;
+  max-width: 90vw;
+  background: #1f1f23;
+  border-left: 1px solid #3f3f46;
+  z-index: 50;
+  overflow-y: auto;
+  transform: translateX(0);
+}
+
+/* ─── List view animations ──────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.15s ease-out;
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
